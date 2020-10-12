@@ -1,56 +1,74 @@
 package com.example.builddream.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.example.builddream.entity.User;
-import com.example.builddream.mapper.UserMapper;
+import com.example.builddream.pojo.User;
+import com.example.builddream.service.UserService;
+import com.example.builddream.utils.BaseResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 
+@Api("用户信息管理")
 @RestController
 public class UserManage {
 
     @Autowired
-    UserMapper userMapper;
+    private UserService userService;
 
-    @RequestMapping(value = "/getUserName",method = RequestMethod.GET)
-    public String getUserName(){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code",0);
-        jsonObject.put("msg","大家好");
-        jsonObject.put("data","试一下");
-
-        return jsonObject.toJSONString();
+    @ApiOperation("根据用户名获取用户信息")
+    @GetMapping("/getUserByName/{name}")
+    public BaseResponse getUserByName(@PathVariable("name") String name){
+       return userService.getUserByName(name);
     }
 
-    @RequestMapping(value = "/getStudentInfo/{cardNo}/{className}",method = RequestMethod.GET)
-    public String getStudentInfo(@PathVariable("cardNo") String cardNo,@PathVariable("className") String className){
-
-        return "学生卡号：" + cardNo + "  学" +
-                "" +
-                "" +
-                "]生班级：" + className;
+    @ApiOperation("添加新用户")
+    @PostMapping("/addUser")
+    public BaseResponse addUser(@RequestBody User user){
+        return userService.addUser(user);
     }
 
-    @GetMapping("/getUserById/{Id}")
-    public User getUserById(@PathVariable("Id") Long Id){
-        User user = new User();
-
-        try {
-            user = userMapper.selectById(Id);
-        }catch (Exception e) {
-            System.out.println(e);
-        }
-        return user;
+    @ApiOperation("修改用户信息")
+    @RequestMapping(value = "modifyUser",method = RequestMethod.PUT)
+    public BaseResponse modifyUser(@RequestBody User user){
+        return userService.modifyUser(user);
     }
 
-    @PostMapping
-    public String addUser(@RequestBody User user){
-       if (0 == userMapper.insert(user)) {
-           return "success!";
-       }
-
-       return "failed!";
+    @ApiOperation("用户登录")
+    @PostMapping("/userLogin")
+    public BaseResponse userLogin(@RequestParam(value = "name", required = true) String name, @RequestParam(value = "password",required = true) String password){
+        return userService.loginUserCompare(name,password);
     }
 
+    @ApiOperation("删除用户")
+    @RequestMapping(value = "deleteUser",method = RequestMethod.DELETE)
+    public BaseResponse deleteUser(User user) {
+        return userService.deleteUser(user);
+    }
+
+
+
+    @RequestMapping({"/", "/index"})
+    public String index(){
+        return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/user")
+    public String user(@AuthenticationPrincipal Principal principal, Model model){
+        model.addAttribute("username", principal.getName());
+        return "user/user";
+    }
+    @RequestMapping("/admin")
+    public String admin(@AuthenticationPrincipal Principal principal, Model model){
+        model.addAttribute("username", principal.getName());
+        return "admin/admin";
+    }
 }
