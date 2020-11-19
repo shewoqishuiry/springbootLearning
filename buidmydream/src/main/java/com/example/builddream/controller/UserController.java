@@ -10,9 +10,21 @@ import java.security.Principal;
 @Controller
 public class UserController {
 
-    @GetMapping("/user")
+    @GetMapping("/user/user")
     public String user(@AuthenticationPrincipal Principal principal, Model model){
         model.addAttribute("username", principal.getName());
         return "user/user";
+    }
+
+    @GetMapping("/admin/admin")
+    public String admin(@AuthenticationPrincipal Principal principal, Model model){
+        model.addAttribute("username", principal.getName());
+        return "admin/admin";
+    }
+
+    @GetMapping("/rbac/rbac")
+    public String rabc(@AuthenticationPrincipal Principal principal, Model model) {
+        model.addAttribute("username", principal.getName());
+        return "rbac/rbac";
     }
 }

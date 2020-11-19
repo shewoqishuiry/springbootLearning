@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Builder;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -43,7 +44,7 @@ public class UserDo {
      * 生日
      */
     @TableField(value = "birthday")
-    private String birthDay;
+    private Timestamp birthDay;
 
     /**
      * 电话号码，不能为空，只是数字
@@ -61,13 +62,13 @@ public class UserDo {
      * 注册时间,插入时设置此字段的值
      */
     @TableField(value = "registTime",fill = FieldFill.INSERT)
-    private Date registTime;
+    private Timestamp registTime;
 
     /**
      * 更新时间，修改时设置此字段的值
      */
     @TableField(value = "updateTime",fill = FieldFill.UPDATE)
-    private Date updateTime;
+    private Timestamp updateTime;
 
     /**
      * 备注
@@ -76,9 +77,9 @@ public class UserDo {
     private String remarks;
 
     /**
-     * 是否已删除，删除标记，用于软删除，对用户信息不做真正意义上的删除
+     * 默认权限
      */
-    @TableField(value = "isDeleted")
-    private Integer isDeleted;
+    @TableField(value = "defaultPermissionId")
+    private Integer defaultPermissionId;
 
 }
