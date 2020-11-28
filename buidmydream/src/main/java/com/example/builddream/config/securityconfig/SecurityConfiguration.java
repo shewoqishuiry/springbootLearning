@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/","/swagger-ui.html").permitAll()
                 .antMatchers("/user/**").hasAuthority("ROLE_USER")
                 .antMatchers("/rbac/rbac").access("@rbacService.hasPermission(request,authentication)")
                 .antMatchers("/admin/admin").access("@rbacService.hasPermission(request,authentication)")

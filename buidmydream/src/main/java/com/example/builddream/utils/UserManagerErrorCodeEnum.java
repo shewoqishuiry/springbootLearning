@@ -10,7 +10,8 @@ public enum UserManagerErrorCodeEnum implements ErrorCode{
     REMOVE_USER_FAIL("0x0001006","Delete user fail."),
     USER_ID_NOT_EXIST("0x0001007","User id not exist."),
     USER_NAME_NOT_EXIST("0x0001008","Username not exist."),
-    USER_NAME_HAS_ALREADY_EXIST("0x0001007","Username has already exist.");
+    USER_NAME_HAS_ALREADY_EXIST("0x0001010","Username has already exist."),
+    MODIFY_USER_ROLE_FAIL("0x0001011","modify user role fail.");
 
     private String code;
     private String message;

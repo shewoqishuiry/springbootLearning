@@ -22,5 +22,9 @@
             and ur.role_id = r.role_id ;
     </select>
 
+    <select id="setDefaultSuccessUrl" parameterType="java.util.Map">
+        update user set defaultPermissionId = ${permissionId} where name = #{userName};
+    </select>
+
 
 </mapper>

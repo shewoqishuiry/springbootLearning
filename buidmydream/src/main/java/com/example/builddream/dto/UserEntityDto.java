@@ -1,12 +1,11 @@
 package com.example.builddream.dto;
 
 
-import com.example.builddream.pojo.UserDo;
+import com.example.builddream.pojo.mybatisdo.UserDo;
 import com.example.builddream.pojo.UserReponseVo;
 import com.example.builddream.pojo.UserSaveVo;
 import com.example.builddream.pojo.UserUpdateVo;
 import org.springframework.util.StringUtils;
-import sun.swing.StringUIClientPropertyKey;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

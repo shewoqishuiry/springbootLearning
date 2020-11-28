@@ -2,7 +2,7 @@ package com.example.builddream.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.builddream.pojo.UserDo;
+import com.example.builddream.pojo.mybatisdo.UserDo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -18,4 +18,6 @@ public interface UserMapper extends BaseMapper<UserDo> {
     public List<String> getUerPermissionUrls (String userName);
 
     public List<String> getUserRoles(String userName);
+
+    public void setDefaultSuccessUrl(Map<String,Object> map);
 }

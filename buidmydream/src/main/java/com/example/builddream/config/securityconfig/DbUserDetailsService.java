@@ -1,8 +1,8 @@
 package com.example.builddream.config.securityconfig;
 
-import com.example.builddream.pojo.UserDo;
-import com.example.builddream.pojo.UserReponseVo;
+import com.example.builddream.pojo.mybatisdo.UserDo;
 import com.example.builddream.service.UserService;
+import com.example.builddream.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

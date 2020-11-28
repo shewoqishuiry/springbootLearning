@@ -1,9 +1,9 @@
 package com.example.builddream.controller;
 
-import com.example.builddream.pojo.UserDo;
 import com.example.builddream.pojo.UserSaveVo;
 import com.example.builddream.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @AllArgsConstructor
 public class HomeCotroller {
 
+    @Autowired
    private final UserService userService;
 
     @GetMapping({"/", "/index", "/home"})
